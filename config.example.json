@@ -1,0 +1,179 @@
+{
+  "_comment": "Copy to config.local.json (gitignored) and fill in. Every machine-local value the hub reads lives here.",
+  "sf_instance": "your-instance.my.salesforce.com",
+  "sf_username": "you@example.com",
+  "sf_user_id": "005XXXXXXXXXXXXXXX",
+  "exclude_accounts": [
+    "Example Account Wrongly Assigned"
+  ],
+  "pulse_accounts": [
+    {
+      "name": "Acme Corp",
+      "id": "001XXXXXXXXXXXXXXX"
+    }
+  ],
+  "product_update_accounts": [
+    {
+      "name": "Globex Inc",
+      "id": "001XXXXXXXXXXXXXXX"
+    }
+  ],
+  "paths": {
+    "brand_dir": "$HOME/brand",
+    "accounts_root": "$HOME/Accounts",
+    "claude_config_dir": "~/.claude",
+    "draft_lessons_file": "~/.claude/memory/draft-lessons.md",
+    "draft_diff_script": "~/account-command-center/scripts/draft_diff.py",
+    "onedrive_root": "~/OneDrive",
+    "solutions_playbook": "$HOME/Accounts/_Solutions/README.md"
+  },
+  "brand": {
+    "colors": {
+      "primary": "1F5FAD",
+      "light": "D6E4F5",
+      "line": "BFBFBF",
+      "dark": "2B2B2B",
+      "muted": "595959",
+      "background": "F5F6F8"
+    },
+    "title_font": "Calibri",
+    "body_font": "Calibri"
+  },
+  "user_email": "you@example.com",
+  "kb_base_url": "https://kb.example.com",
+  "mail_account_name": "Work",
+  "email_signature_html": "<div><b>--</b></div><div>Jordan Lee | Account Manager | Example Co.</div>",
+  "platform_api_base": "https://api.example-video.com/v1/service",
+  "platform_object_prefix": "Vendor",
+  "account_report": {
+    "account_name": "Acme Corp",
+    "partner_ids": [
+      1000001,
+      1000002,
+      1000003
+    ],
+    "dev_partner_ids": [
+      1000003
+    ],
+    "from_date": "2026-01-01"
+  },
+  "tls_extra_ca": "",
+  "folder_overrides": {
+    "Globex Inc L&D": "Globex Inc",
+    "Marketplace / Initech LLC": "Initech LLC (Marketplace)"
+  },
+  "sf_defaults": {
+    "renewal_type": "Renewal",
+    "placeholder_opportunity": {
+      "Type": "Upsell",
+      "RecordTypeId": "012000000000000AAA",
+      "sub_type": "Organic Growth",
+      "buyers": "Executive",
+      "incumbents": "None",
+      "what_type_of_deal_is_this": "Normal"
+    }
+  },
+  "account_tracker": {
+    "account_name": "Acme Corp",
+    "workbook_path": "Acme Corp/Acme Corp - MASTER Tracker.xlsx",
+    "sheet": "Active Issues",
+    "meeting_title": "Acme Bi-weekly status meeting",
+    "contacts": [
+      "Jordan Lee",
+      "Sam Rivera",
+      "Alex Chen"
+    ],
+    "jira_projects": [
+      "ABC",
+      "XYZ"
+    ],
+    "lead_minutes": 60
+  },
+  "product_update_sources": {
+    "newsletter_senders": [
+      "product-news@example.com"
+    ],
+    "newsletter_subject": "Product Newsletter",
+    "product_leads": {
+      "Jordan Lee": "Events",
+      "Sam Rivera": "AI agents",
+      "Alex Chen": "Player"
+    }
+  },
+  "sf_fields": {
+    "account": "Custom_Field_01__c",
+    "account_manager": "Custom_Field_02__c",
+    "account_usage": "Custom_Field_03__c",
+    "active_products": "Custom_Field_04__c",
+    "average_storage_gb": "Custom_Field_05__c",
+    "bandwidth_combined_gb": "Custom_Field_06__c",
+    "billing_frequency": "Custom_Field_07__c",
+    "buyers": "Custom_Field_08__c",
+    "closest_renewal_date": "Custom_Field_09__c",
+    "contract_length": "Custom_Field_10__c",
+    "deal_type": "Custom_Field_11__c",
+    "dealhub_account": "Custom_Field_12__c",
+    "dealhub_quantity": "Custom_Field_13__c",
+    "dealhub_quote_id": "Custom_Field_14__c",
+    "dealhub_sales_price": "Custom_Field_15__c",
+    "dealhub_status": "Custom_Field_16__c",
+    "dealhub_subscription": "Custom_Field_17__c",
+    "dealhub_subscription_end_date": "Custom_Field_18__c",
+    "dealhub_subscription_start_date": "Custom_Field_19__c",
+    "dealhub_total_price": "Custom_Field_20__c",
+    "delta_price_mrr": "Custom_Field_21__c",
+    "dh_renewal_mrr": "Custom_Field_22__c",
+    "dh_upsell_downgrade_mrr": "Custom_Field_23__c",
+    "end_date": "Custom_Field_24__c",
+    "gong_call_brief": "Gong__Call_Brief__c",
+    "gong_call_duration": "Gong__Call_Duration__c",
+    "gong_call_duration_sec": "Gong__Call_Duration_sec__c",
+    "gong_call_highlights_next_steps": "Gong__Call_Highlights_Next_Steps__c",
+    "gong_call_id": "Gong__Call_ID__c",
+    "gong_call_key_points": "Gong__Call_Key_Points__c",
+    "gong_call_start": "Gong__Call_Start__c",
+    "gong_gong_call": "Gong__Gong_Call__c",
+    "gong_participants_emails": "Gong__Participants_Emails__c",
+    "gong_primary_account": "Gong__Primary_Account__c",
+    "gong_view_call": "Gong__View_call__c",
+    "incumbents": "Custom_Field_25__c",
+    "journey": "Custom_Field_26__c",
+    "platform_partner_id": "Custom_Field_27__c",
+    "main_platform_partner_id": "Custom_Field_28__c",
+    "month": "Custom_Field_29__c",
+    "mrr": "Custom_Field_30__c",
+    "parent_enrichment": "Custom_Field_31__c",
+    "parent_total_agg_mrr": "Custom_Field_32__c",
+    "payment_terms": "Custom_Field_33__c",
+    "pid_monthly_usage": "Custom_Field_34__c",
+    "primary_business_contact_o": "Custom_Field_35__c",
+    "caption_credits_remaining": "Custom_Field_36__c",
+    "rr": "Custom_Field_37__c",
+    "sbqq_contracted": "SBQQ__Contracted__c",
+    "sbqq_effectiveenddate": "SBQQ__EffectiveEndDate__c",
+    "sbqq_effectivestartdate": "SBQQ__EffectiveStartDate__c",
+    "sbqq_listprice": "SBQQ__ListPrice__c",
+    "sbqq_nettotal": "SBQQ__NetTotal__c",
+    "sbqq_opportunity": "SBQQ__Opportunity__c",
+    "sbqq_opportunity2": "SBQQ__Opportunity2__c",
+    "sbqq_primary": "SBQQ__Primary__c",
+    "sbqq_productname": "SBQQ__ProductName__c",
+    "sbqq_proratemultiplier": "SBQQ__ProrateMultiplier__c",
+    "sbqq_quantity": "SBQQ__Quantity__c",
+    "sbqq_quote": "SBQQ__Quote__c",
+    "sbqq_quoteline": "SBQQ__QuoteLine__c",
+    "sbqq_startdate": "SBQQ__StartDate__c",
+    "sbqq_subscriptionterm": "SBQQ__SubscriptionTerm__c",
+    "start_date": "Custom_Field_38__c",
+    "sub_type": "Custom_Field_39__c",
+    "subscription_term": "Custom_Field_40__c",
+    "tcv": "Custom_Field_41__c",
+    "total_active_rr": "Custom_Field_42__c",
+    "usage_status": "Custom_Field_43__c",
+    "usecases": "Custom_Field_44__c",
+    "what_type_of_deal_is_this": "Custom_Field_45__c",
+    "dealhub_opportunity": "Custom_Field_72__c",
+    "dealhub_product": "Custom_Field_73__c",
+    "partner_id": "Custom_Field_74__c"
+  }
+}

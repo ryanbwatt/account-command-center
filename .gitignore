@@ -1,0 +1,19 @@
+# machine-local state
+config.local.json
+.claude/settings.local.json
+.venv/
+.mcp-server.pid
+.env*
+
+# logs and caches
+*.log
+logs/
+__pycache__/
+.DS_Store
+
+# per-account scratch — local by default, force-add to share
+issues/*
+!issues/.gitkeep
+
+# generated doc caches
+docs/accounts-cache.md

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "account-hub": {
+      "type": "http",
+      "url": "http://localhost:19234/mcp"
+    }
+  }
+}

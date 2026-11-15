@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Wednesday 10:00 (local, ET) refresh of the account tracker workbook, 1 hr before the weekly account sync. Edits only the tracker .xlsx (backup first); no drafts, never sends.
+
+  This is a TEMPLATE checked into the repo. It is NOT active until installed:
+      scripts/launchd/install.sh com.commandcenter.accounttracker
+      (launchd does not expand $HOME, so install.sh replaces the repo-path
+      placeholder (double-underscore CC_DIR) with the real path and copies the result to ~/Library/LaunchAgents/)
+      launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.commandcenter.accounttracker.plist
+      launchctl enable gui/$(id -u)/com.commandcenter.accounttracker
+  To stop / remove:
+      launchctl bootout gui/$(id -u)/com.commandcenter.accounttracker
+      rm ~/Library/LaunchAgents/com.commandcenter.accounttracker.plist
+  To fire once on demand (test the installed job):
+      launchctl kickstart -k gui/$(id -u)/com.commandcenter.accounttracker
+
+  The Mac must be awake and the user logged in at fire time; if asleep, launchd runs the
+  missed job once on wake.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.commandcenter.accounttracker</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__CC_DIR__/scripts/run_draft_job.sh</string>
+        <string>account-tracker-update</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>DRAFT_JOB_MODEL</key>
+        <string>claude-sonnet-5</string>
+    </dict>
+
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
+    </array>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+
+    <key>StandardOutPath</key>
+    <string>__CC_DIR__/logs/account-tracker-update/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>__CC_DIR__/logs/account-tracker-update/launchd.err.log</string>
+</dict>
+</plist>

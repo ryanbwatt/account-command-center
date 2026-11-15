@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Monday 08:00 trigger for pulse + one tip (Outlook drafts only, never sends).
+
+  This is a TEMPLATE checked into the repo. It is NOT active until installed:
+      scripts/launchd/install.sh com.commandcenter.pulsetip
+      (launchd does not expand $HOME, so install.sh replaces the repo-path
+      placeholder (double-underscore CC_DIR) with the real path and copies the result to ~/Library/LaunchAgents/)
+      launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.commandcenter.pulsetip.plist
+      launchctl enable gui/$(id -u)/com.commandcenter.pulsetip
+  To stop / remove:
+      launchctl bootout gui/$(id -u)/com.commandcenter.pulsetip
+      rm ~/Library/LaunchAgents/com.commandcenter.pulsetip.plist
+  To fire once on demand (test the installed job):
+      launchctl kickstart -k gui/$(id -u)/com.commandcenter.pulsetip
+
+  The Mac must be awake and the user logged in at fire time; if asleep, launchd runs the
+  missed job once on wake.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.commandcenter.pulsetip</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__CC_DIR__/scripts/run_draft_job.sh</string>
+        <string>pulse-tip</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>DRAFT_JOB_MODEL</key>
+        <string>claude-sonnet-5</string>
+    </dict>
+
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>0</integer></dict>
+    </array>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+
+    <key>StandardOutPath</key>
+    <string>__CC_DIR__/logs/pulse-tip/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>__CC_DIR__/logs/pulse-tip/launchd.err.log</string>
+</dict>
+</plist>

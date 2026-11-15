@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Weekday 17:30 trigger for the post-call loop (follow-up drafts + Next Step proposals).
+
+  This is a TEMPLATE checked into the repo. It is NOT active until installed:
+      scripts/launchd/install.sh com.commandcenter.postcall
+      (launchd does not expand $HOME, so install.sh replaces the repo-path
+      placeholder (double-underscore CC_DIR) with the real path and copies the result to ~/Library/LaunchAgents/)
+      launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.commandcenter.postcall.plist
+      launchctl enable gui/$(id -u)/com.commandcenter.postcall
+  To stop / remove:
+      launchctl bootout gui/$(id -u)/com.commandcenter.postcall
+      rm ~/Library/LaunchAgents/com.commandcenter.postcall.plist
+  To fire once on demand (test the installed job):
+      launchctl kickstart -k gui/$(id -u)/com.commandcenter.postcall
+
+  The Mac must be awake and the user logged in at fire time; if asleep, launchd runs the
+  missed job once on wake.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.commandcenter.postcall</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__CC_DIR__/scripts/run_draft_job.sh</string>
+        <string>post-call</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>DRAFT_JOB_MODEL</key>
+        <string>claude-sonnet-5</string>
+    </dict>
+
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>30</integer></dict>
+        <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>30</integer></dict>
+        <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>30</integer></dict>
+        <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>30</integer></dict>
+        <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>30</integer></dict>
+    </array>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+
+    <key>StandardOutPath</key>
+    <string>__CC_DIR__/logs/post-call/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>__CC_DIR__/logs/post-call/launchd.err.log</string>
+</dict>
+</plist>

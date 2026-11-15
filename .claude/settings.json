@@ -1,0 +1,31 @@
+{
+  "hooks": {
+    "SessionStart": [{ "matcher": "", "hooks": [{ "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/bootstrap.sh" }] }],
+    "PreToolUse":   [{ "hooks": [{ "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/hooks/dispatch.sh pre-tool-use" }] }],
+    "PostToolUse":  [{ "hooks": [{ "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/hooks/dispatch.sh post-tool-use" }] }],
+    "Stop":         [{ "hooks": [{ "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/hooks/dispatch.sh stop" }] }],
+    "SessionEnd":   [{ "hooks": [{ "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/hooks/dispatch.sh session-end" }] }],
+    "Notification": [{ "hooks": [{ "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/hooks/dispatch.sh notification" }] }],
+    "PreCompact":   [{ "hooks": [{ "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/hooks/dispatch.sh pre-compact" }] }],
+    "SubagentStop": [{ "hooks": [{ "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/hooks/dispatch.sh subagent-stop" }] }]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(curl -s http://localhost:19234/*)",
+      "Bash(ls *)",
+      "Bash(find * -name *)",
+      "Read(*)",
+      "Agent"
+    ],
+    "deny": []
+  }
+}

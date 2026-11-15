@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Weekday-morning trigger for the account morning brief.
+
+  This is a TEMPLATE checked into the repo. It is NOT active until installed:
+      scripts/launchd/install.sh com.commandcenter.morningbrief
+      (launchd does not expand $HOME, so install.sh replaces the repo-path
+      placeholder (double-underscore CC_DIR) with the real path and copies the result to ~/Library/LaunchAgents/)
+      launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.commandcenter.morningbrief.plist
+      launchctl enable gui/$(id -u)/com.commandcenter.morningbrief
+  To stop / remove:
+      launchctl bootout gui/$(id -u)/com.commandcenter.morningbrief
+      rm ~/Library/LaunchAgents/com.commandcenter.morningbrief.plist
+  To fire once on demand (test the installed job):
+      launchctl kickstart -k gui/$(id -u)/com.commandcenter.morningbrief
+
+  Fires Mon–Fri at 08:30 local. The runner also guards weekends itself. The Mac
+  must be awake and the user logged in at fire time; if asleep, launchd runs the
+  missed job once on wake.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.commandcenter.morningbrief</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__CC_DIR__/scripts/run_morning_brief.sh</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>MORNING_BRIEF_MODE</key>
+        <string>send</string>
+        <key>MORNING_BRIEF_MODEL</key>
+        <string>claude-sonnet-5</string>
+    </dict>
+
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>30</integer></dict>
+        <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>30</integer></dict>
+        <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>30</integer></dict>
+        <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>30</integer></dict>
+        <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>30</integer></dict>
+    </array>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+
+    <key>StandardOutPath</key>
+    <string>__CC_DIR__/logs/morning-brief/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>__CC_DIR__/logs/morning-brief/launchd.err.log</string>
+</dict>
+</plist>
